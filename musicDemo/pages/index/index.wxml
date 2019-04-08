@@ -1,0 +1,10 @@
+<!--pages/index/index.wxml-->
+<view
+  class='item'
+  wx:for='{{type}}' wx:key='{{index}}'
+  bindtap='tap'
+  data-index='{{index}}'
+>
+  <text class='itemIndex'>{{index+1}}</text>
+  <text class='itemTitle'>{{item[index]}}</text>
+</view>

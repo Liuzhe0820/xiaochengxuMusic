@@ -1,0 +1,15 @@
+/* pages/index/index.wxss */
+page{
+  background-color:#ccc;
+}
+.item{
+  padding:30rpx;
+  margin:20rpx 0;
+  background-color:#fff;
+
+}
+.itemIndex{
+  font:30px/1.5 '微软雅黑';
+  color:green;
+  margin-right:50rpx;
+}

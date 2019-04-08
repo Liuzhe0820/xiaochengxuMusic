@@ -1,0 +1,19 @@
+/* pages/list/list.wxss */
+page{
+  background-color:#333;
+}
+.item{
+  padding:20rpx;
+  display: flex;
+}
+.item image{
+  width:200rpx;
+  height:200rpx;
+}
+.item .musicInfo{
+  font:14px/2 '微软雅黑';
+  color:#fff;
+  width:510rpx;
+  background-color:#222;
+  text-indent: 50rpx;
+}

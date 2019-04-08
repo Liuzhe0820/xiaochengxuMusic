@@ -1,0 +1,10 @@
+<!--pages/play/play.wxml-->
+<image class='img' src='{{song.al.picUrl}}'></image>
+<slider
+  min='0'max='{{}}' setp='1' block-size='20'
+>
+</slider>
+<view class='time'>
+  <text class='now'>00:00</text>
+  <text class='duration'>00:00</text>
+</view>
