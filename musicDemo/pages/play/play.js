@@ -12,7 +12,10 @@ Page({
     duration:0,
     current:0,
     isDown:false,
-    isPause:false
+    isPause:false,
+    lrc:{
+      '0':'正在获取歌词'
+    }
   },
 
   /**
@@ -20,6 +23,20 @@ Page({
    */
   onLoad: function (options) {
     let { id } = options;
+    wx.request({//获取歌词
+      url: url.lyric+'?id='+id,
+      success:(res)=>{
+        let { lyric }=res.data.lrc;
+        let r = /\[(.*?)](.*)/g;
+        let obj = {};
+        lyric.replace(r,($0,$1,$2)=>{
+          obj[$1.substring(0,5)]=$2;
+        });
+        this.setData({
+          lrc:obj
+        });
+      }
+    });
     wx.request({//获取歌曲详情
       url: url.musicDetail + '?ids=' + id,
       success: (res) => {
@@ -27,13 +44,15 @@ Page({
           song: res.data.songs[0]
         });
         let { song } = app.globalData;//全局音频播放
+        console.log(song);
+
         if (!song) {
           // song = app.globalData.song = wx.createInnerAudioContext();
           song = app.globalData.song = wx.getBackgroundAudioManager();
-          song.title=this.data.song.name;
         };
+        song.title = this.data.song.name;
         song.src = `http://music.163.com/song/media/outer/url?id=${id}.mp3`;
-
+        console.log(id)
         song.play();
         song.onPlay(res => {
           this.setData({
@@ -64,7 +83,6 @@ Page({
     })
   },
   change:function(e){//拖拽后定义播放时间
-    console.log(e);
     this.setData({
       isDown: false
     });
