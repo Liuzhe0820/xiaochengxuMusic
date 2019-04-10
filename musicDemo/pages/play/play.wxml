@@ -1,10 +1,27 @@
 <!--pages/play/play.wxml-->
+<wxs module='foo'>
+  module.exports={
+    gethour:function(n){
+      n=Math.floor(n);
+      return n<10?'0'+n:''+n
+    }
+  }
+</wxs>
 <image class='img' src='{{song.al.picUrl}}'></image>
 <slider
-  min='0'max='{{}}' setp='1' block-size='20'
+  min='0'max='{{duration}}' setp='1' block-size='20'
+  value='{{current}}'
+  bindchange='change'
+  bindchanging='changing'
 >
 </slider>
 <view class='time'>
-  <text class='now'>00:00</text>
-  <text class='duration'>00:00</text>
+  <text class='now'>{{foo.gethour(current/60)}}:{{foo.gethour(current%60)}}</text>
+  <text class='duration'>{{foo.gethour(duration/60)}}:{{foo.gethour(duration%60)}}</text>
+</view>
+<view class='btn'>
+  <view class='previous'><image src='../../data/img/previous.png'></image></view>
+  <view bindtap='playTap' class='play' wx:if='{{isPause}}'><image src='../../data/img/play.png'></image></view>
+  <view bindtap='playTap' class='pause' wx:if='{{!isPause}}'><image src='../../data/img/pause.png'></image></view>
+  <view  class='next'><image src='../../data/img/next.png'></image></view>
 </view>

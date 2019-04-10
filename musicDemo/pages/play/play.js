@@ -8,7 +8,11 @@ Page({
    */
   data: {
     song: {},
-    src: {}
+    src: {},
+    duration:0,
+    current:0,
+    isDown:false,
+    isPause:false
   },
 
   /**
@@ -16,62 +20,70 @@ Page({
    */
   onLoad: function (options) {
     let { id } = options;
-    let src;
-    wx.request({
+    wx.request({//获取歌曲详情
       url: url.musicDetail + '?ids=' + id,
       success: (res) => {
-        console.log(res.data.songs[0]);
         this.setData({
           song: res.data.songs[0]
         });
-        let { song } = app.globalData;
+        let { song } = app.globalData;//全局音频播放
         if (!song) {
-          song = app.globalData.song = wx.createInnerAudioContext();
+          // song = app.globalData.song = wx.createInnerAudioContext();
           song = app.globalData.song = wx.getBackgroundAudioManager();
-          song.title = this.data.song.name;
+          song.title=this.data.song.name;
         };
         song.src = `http://music.163.com/song/media/outer/url?id=${id}.mp3`;
 
         song.play();
         song.onPlay(res => {
-          console.log('开始');
+          this.setData({
+            isPause: song.paused
+          });
         });
-        song.onTimeUpdate(function () {
-          console.log(1)
+        song.onTimeUpdate(()=>{//播放进度监控
+          if(this.data.duration!==song.duration){
+            this.setData({
+              duration:song.duration
+            });
+          };
+          if(!this.data.isDown){
+            this.setData({
+              current: song.currentTime
+            })
+          }
+          
         });
       }
     });
-
-
-
-    // wx.request({
-    //   url: url.musicPlay +'?id='+id,
-    //   success:(res)=>{
-    //     console.log(res);
-    //     this.setData({
-    //       src: res.data.data[0]
-    //     });
-    //     console.log(this.data.src);
-    //     let { song } = app.globalData;
-    //     console.log(song);
-    //     if (!song) {
-    //       song = app.globalData.song = wx.createInnerAudioContext();
-    //     };
-    //     song.src = this.data.src.url;
-    //     song.play();
-    //     song.onPlay(res => {
-    //       console.log('开始');
-    //       song.onTimeUpdate(() => {
-    //         console.log(1);
-    //         console.log(song)
-    //       });
-    //     });
-
-    //   }
-    // })
+    
 
   },
-
+  changing:function(){//进度拖拽
+    this.setData({
+      isDown:true
+    })
+  },
+  change:function(e){//拖拽后定义播放时间
+    console.log(e);
+    this.setData({
+      isDown: false
+    });
+    app.globalData.song.seek(e.detail.value)
+  },
+  playTap:function(){//播放暂停
+    let { song } = app.globalData;
+    if (!this.data.isPause){
+      this.setData({
+        isPause: true
+      });
+      song.pause();
+    }else{
+      song.play();
+      this.setData({
+        isPause: false
+      });
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

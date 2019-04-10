@@ -40,7 +40,6 @@ Page({
 
   },
   tap:function(e){
-    console.log(e);
     wx.navigateTo({
       url:'/pages/list/list?id='+e.currentTarget.dataset.index
     });

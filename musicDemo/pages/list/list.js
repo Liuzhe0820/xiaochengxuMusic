@@ -16,7 +16,6 @@ Page({
     wx.request({
       url: url.list + '?idx=' + options.id,
       success:(res)=>{
-        console.log(res);
         this.setData({
           list: res.data.playlist.tracks.slice(0,10)
         });
@@ -27,7 +26,6 @@ Page({
     })
   },
   tap:function(e){
-    console.log(e);
     let {id} = e.currentTarget.dataset;
     wx.navigateTo({
       url:'/pages/play/play?id='+id
