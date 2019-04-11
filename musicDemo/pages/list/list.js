@@ -1,12 +1,14 @@
 // pages/list/list.js
 import url from "../../config/url.js";
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+    list:[],
+    n:0
   },
 
   /**
@@ -18,8 +20,9 @@ Page({
       success:(res)=>{
         console.log(res)
         this.setData({
-          list: res.data.playlist.tracks.slice(0,10)
+          list: res.data.playlist.tracks.slice(this.data.n, this.data.n+10)
         });
+        app.globalData.musicList = res.data.playlist.tracks;
         wx.setNavigationBarTitle({
           title: res.data.playlist.name,
         })
@@ -31,6 +34,12 @@ Page({
     wx.navigateTo({
       url:'/pages/play/play?id='+id
     })
+  },
+  lower:function(){
+  //   this.data.n = this.data.n+10;
+  //  this.setData({
+  //    list: app.globalData.musicList.slice(this.data.n, this.data.n + 10)
+  //  })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

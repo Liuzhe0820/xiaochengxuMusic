@@ -1,6 +1,7 @@
 /* pages/list/list.wxss */
 page{
   background-color:#333;
+  height:100%;
 }
 .item{
   padding:20rpx;
@@ -16,4 +17,10 @@ page{
   width:510rpx;
   background-color:#222;
   text-indent: 50rpx;
+}
+.loading{
+ text-align: center;
+}
+.loading image{
+  width:100rpx;
 }

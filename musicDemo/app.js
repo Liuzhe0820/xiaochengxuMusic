@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
-    song: null
+    song: null,
+    musicList:[]
   }
 })

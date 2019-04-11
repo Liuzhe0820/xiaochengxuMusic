@@ -1,4 +1,5 @@
 // pages/index/index.js
+import url from "../../config/url.js";
 Page({
 
   /**
@@ -30,14 +31,22 @@ Page({
       { "21": 'Beatport全球电子舞曲榜' },
       { "22": '云音乐ACG音乐榜' },
       { "23": '云音乐嘻哈榜' }
-    ]
+    ],
+    newType:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.request({
+      url: url.topList,
+      success:(res)=>{
+        this.setData({
+          newType:res.data.list
+        })
+      }
+    })
   },
   tap:function(e){
     wx.navigateTo({
