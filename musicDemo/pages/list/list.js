@@ -36,10 +36,18 @@ Page({
     })
   },
   lower:function(){
-  //   this.data.n = this.data.n+10;
-  //  this.setData({
-  //    list: app.globalData.musicList.slice(this.data.n, this.data.n + 10)
-  //  })
+    if (this.data.list.length === app.globalData.musicList.length){
+      wx.showToast({
+        title:'已无更多内容',
+        icon:'none',
+      })
+    }else{
+      this.data.n = this.data.n + 10;
+      this.setData({
+        list: app.globalData.musicList.slice(0, this.data.n + 10)
+      });
+    }
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
