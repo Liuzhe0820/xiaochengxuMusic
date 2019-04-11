@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    musicId:'',
     song: {},
     src: {},
     duration:0,
@@ -24,6 +25,9 @@ Page({
    */
   onLoad: function (options) {
     let { id } = options;
+    this.setData({
+      musicId:id
+    });
     wx.request({//获取歌词
       url: url.lyric+'?id='+id,
       success:(res)=>{
@@ -108,6 +112,9 @@ Page({
         isPause: false
       });
     }
+  },
+  next:function(){
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

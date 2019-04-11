@@ -23,7 +23,7 @@
   <view class='previous'><image src='../../data/img/previous.png'></image></view>
   <view bindtap='playTap' class='play' wx:if='{{isPause}}'><image src='../../data/img/play.png'></image></view>
   <view bindtap='playTap' class='pause' wx:if='{{!isPause}}'><image src='../../data/img/pause.png'></image></view>
-  <view  class='next'><image src='../../data/img/next.png'></image></view>
+  <view bindtap='next'  class='next'><image src='../../data/img/next.png'></image></view>
 </view>
 <scroll-view class='scroll'
   scroll-y= 'true'
