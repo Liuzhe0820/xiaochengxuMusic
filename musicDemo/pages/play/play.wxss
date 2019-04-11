@@ -38,7 +38,7 @@ page{
 .scroll{
   /* color:#fff; */
   text-align: center;
-  height:200rpx;
+  height:100rpx;
   background-color:#ccc;
   margin-top:50rpx;
   /* position:absolute;

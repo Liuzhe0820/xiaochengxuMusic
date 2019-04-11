@@ -15,7 +15,8 @@ Page({
     isPause:false,
     lrc:{
       '0':'正在获取歌词'
-    }
+    },
+    currentlrc:''
   },
 
   /**
@@ -69,8 +70,16 @@ Page({
             this.setData({
               current: song.currentTime
             })
+          };
+          let { currentTime } = song;
+          let min = Math.floor(currentTime/60);
+          let sec = Math.floor(currentTime%60);
+          let attr = (min < 10 ? '0' + min :''+ min) + ':' + (sec < 10 ? '0' + sec :'' +sec);
+          if (attr in this.data.lrc && 'el-' + attr !== this.data.currentlrc){
+            this.setData({
+              currentlrc : 'el-' + attr
+            })
           }
-          
         });
       }
     });
