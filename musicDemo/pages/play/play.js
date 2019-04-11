@@ -45,7 +45,6 @@ Page({
           song: res.data.songs[0]
         });
         let { song } = app.globalData;//全局音频播放
-        console.log(song);
 
         if (!song) {
           // song = app.globalData.song = wx.createInnerAudioContext();
@@ -53,7 +52,6 @@ Page({
         };
         song.title = this.data.song.name;
         song.src = `http://music.163.com/song/media/outer/url?id=${id}.mp3`;
-        console.log(id)
         song.play();
         song.onPlay(res => {
           this.setData({

@@ -39,10 +39,13 @@ page{
   /* color:#fff; */
   text-align: center;
   height:100rpx;
-  background-color:#ccc;
+  background-color:#666;
   margin-top:50rpx;
   /* position:absolute;
   left:0;
   bottom:50rpx;
   z-index: 20; */
+}
+.white{
+  color:#fff;
 }
